@@ -1,0 +1,67 @@
+﻿@model Genius.Models.View.SearchVM
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="col-12" id="search">
+    <form asp-action="Search" asp-controller="Search" method="get" class="row">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="form-group col-md-10">
+            <input name="term" placeholder="Search Song, Album or Artist..." type="text" class="form-control col-10" />
+        </div>
+        <div class="form-group col-md-2">
+            <input type="submit" value="Search" class="btn btn-default col-12" />
+        </div>
+    </form>
+</div>
+
+<h2>Results</h2>
+<hr />
+
+<div class="songs">
+    <h3>Songs</h3>
+    <ul class="list-group">
+        @foreach (var song in Model.Songs)
+        {
+            <li class="list-group-item">
+                <a href="/songs/@song.Id/details">
+                    <img src="data:image/png;base64,@song.CoverArt">
+                    @song.Title
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+<hr />
+
+<div class="albums">
+    <h3>Albums</h3>
+    <ul class="list-group">
+        @foreach (var album in Model.Albums)
+        {
+            <li class="list-group-item">
+                <a href="/albums/@album.Id/details">
+                    <img src="data:image/png;base64,@album.CoverArt">
+                    @album.Title
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+<hr />
+
+<div class="albums">
+    <h3>Artists</h3>
+    <ul class="list-group">
+        @foreach (var artist in Model.Artists)
+        {
+            <li class="list-group-item">
+                <a href="/artists/@artist.Id/details">
+                    <img src="data:image/png;base64,@artist.Photo">
+                    @artist.Name
+                </a>
+            </li>
+        }
+    </ul>
+</div>

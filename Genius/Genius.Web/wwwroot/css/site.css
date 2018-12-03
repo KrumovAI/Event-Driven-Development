@@ -1,0 +1,95 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification\ 
+for details on configuring this project to bundle and minify static web assets. */
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+textarea {
+    resize: vertical;
+}
+
+.lyrics {
+    white-space: pre-line;
+    line-height: 2rem;
+    border-right: 3px dashed #eee;
+}
+
+.lyrics::selection {
+    background-color: #ddd;
+}
+
+.annotated {
+    background-color: #bbb;
+    user-select: none;
+}
+
+.annotated:hover {
+    background-color: #ccc;
+    cursor: pointer;
+}
+
+.annotation-info {
+    background-color: #f3f3f3;
+    padding: 1rem;
+}
+
+.bio {
+    margin-top: 3rem;
+}
+
+#view-annotation, #add-annotation, #edit-annotation {
+    display: none;
+}
+
+.picture-info {
+    margin: 1rem 0;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.picture-info .picture img {
+    max-width: 100%;
+}
+
+.list-group-item img {
+    width: 100px;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 1rem;
+}
+
+#search {
+    margin-top: 3rem;
+}

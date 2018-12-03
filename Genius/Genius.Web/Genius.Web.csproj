@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>aspnet-Genius.Web-14E45A42-6FE5-43D0-86E7-3160CA58217B</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" PrivateAssets="All" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Genius.Common\Genius.Common.csproj" />
+    <ProjectReference Include="..\Genius.Data\Genius.Data.csproj" />
+    <ProjectReference Include="..\Genius.Models\Genius.Models.csproj" />
+    <ProjectReference Include="..\Genius.Services\Genius.Services.csproj" />
+  </ItemGroup>
+
+</Project>

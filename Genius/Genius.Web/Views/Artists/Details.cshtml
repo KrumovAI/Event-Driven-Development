@@ -1,0 +1,45 @@
+﻿@model Genius.Models.View.ArtistVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="picture-info col-12">
+    <div class="picture col-12 col-lg-2">
+        <img src="data:image/png;base64,@Model.Photo">
+    </div>
+    <div class="info col-12 col-lg-10">
+        <h3 class="title">@Html.DisplayFor(model => model.Name)</h3>
+    </div>
+</div>
+
+<hr />
+<div class="col-12 jumbotron">
+    @Model.About
+</div>
+<hr />
+
+<div class="albums">
+    <ul class="list-group">
+        @foreach (var album in Model.Albums)
+        {
+            <li class="list-group-item">
+                <a href="/albums/@album.Id/details">
+                    <img src="data:image/png;base64,@album.CoverArt">
+                    @album.Title
+                </a>
+            </li>
+        }
+    </ul>
+</div>
+
+@if (User.IsInRole("Admin"))
+{
+    <div class="col-md-12 text-center">
+        <hr />
+        @Html.ActionLink("Add Album", "Save", "Albums", routeValues: new { artistId = Model.Id }, htmlAttributes: new { @class = "btn btn-default" })
+        @Html.ActionLink("Edit", "Save", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+        @Html.ActionLink("Delete", "Delete", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+    </div>
+}
+

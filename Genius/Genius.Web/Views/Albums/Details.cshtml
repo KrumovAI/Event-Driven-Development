@@ -1,0 +1,37 @@
+﻿@model Genius.Models.View.AlbumVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="picture-info col-12">
+    <div class="picture col-12 col-lg-2">
+        <img src="data:image/png;base64,@Model.CoverArt">
+    </div>
+    <div class="info col-12 col-lg-10">
+        <h3 class="title">@Html.DisplayFor(model => model.Title)</h3>
+        <h4 class="artist">By @Html.ActionLink(Model.ArtistName, "Details", "Artists", routeValues: new { id = Model.ArtistId })</h4>
+        <p class="type">@Html.DisplayFor(model => model.Type)</p>
+        <p class="release-date">@Html.DisplayFor(model => model.ReleaseYear)</p>
+    </div>
+</div>
+<hr />
+<div class="songs">
+    <ul class="list-group">
+    @foreach (var song in Model.Songs)
+    {
+    <li class="list-group-item">
+        @Html.ActionLink($"#{song.TrackIndex} {song.Title}", "Details", "Songs", routeValues: new { id = song.Id })
+    </li>
+    }
+    </ul>
+</div>
+@if (User.IsInRole("Admin"))
+{
+    <div class="col-md-12 text-center">
+        <hr />
+        @Html.ActionLink("Add Song", "Save", "Songs", routeValues: new { albumId = Model.Id }, htmlAttributes: new { @class = "btn btn-default" })
+        @Html.ActionLink("Edit", "Save", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+        @Html.ActionLink("Delete", "Delete", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+    </div>
+}

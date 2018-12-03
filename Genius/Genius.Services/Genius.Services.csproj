@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Genius.Common\Genius.Common.csproj" />
+    <ProjectReference Include="..\Genius.Data\Genius.Data.csproj" />
+    <ProjectReference Include="..\Genius.Models\Genius.Models.csproj" />
+  </ItemGroup>
+
+</Project>

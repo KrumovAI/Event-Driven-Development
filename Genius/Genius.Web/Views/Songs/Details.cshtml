@@ -1,0 +1,82 @@
+﻿@using Genius.Web.Infrastructure.Extensions
+@using System.Text.Encodings.Web;
+@model Genius.Models.View.SongVM
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+@{
+    foreach (var annotation in Model.Annotations)
+    {
+        Model.Lyrics = Model.Lyrics.Replace(annotation.Text, $"<span onclick=\'viewAnnotation({annotation.Id}, \"{JavaScriptEncoder.Default.Encode(annotation.Text)}\", \"{JavaScriptEncoder.Default.Encode(annotation.Content)}\", \"{JavaScriptEncoder.Default.Encode(annotation.AuthorName)}\", {(annotation.AuthorId == User.GetUserId()).ToString().ToLower()})\' class='annotated'>{annotation.Text}</span>");
+    }
+}
+<div class="picture-info col-12">
+    <div class="picture col-12 col-lg-2">
+        <img src="data:image/png;base64,@Model.CoverArt">
+    </div>
+    <div class="info col-12 col-lg-10">
+        <h3 class="title">@Html.DisplayFor(model => model.Title)</h3>
+        <h5 class="artist">@Html.ActionLink(Model.ArtistName, "Details", "Artists", routeValues: new { id = Model.ArtistId })</h5>
+        <p class="album">Album @Html.ActionLink(Model.AlbumName, "Details", "Albums", routeValues: new { id = Model.AlbumId })</p>
+    </div>
+</div>
+<hr />
+<div class="col-12">
+    <div class="lyrics col-md-6" onclick="textSelected()">
+        @Html.Raw(Model.Lyrics)
+    </div>
+    <div class="col-md-6">
+        <div id="view-annotation">
+            <blockquote id="view-annotation-content"></blockquote>
+            <p>By <b id="view-annotation-author"></b></p>
+        </div>
+
+        <div id="add-annotation" class="annotation-info">
+            <form asp-action="Add" asp-controller="Annotations">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input name="songId" value="@Model.Id" type="hidden" class="form-control" />
+                <textarea required id="add-annotation-text" class="form-control" name="text" style="display: none"></textarea>
+                <div class="form-group">
+                    <textarea required id="annotation-content" class="form-control" name="content" placeholder="Add annotation"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Add" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+
+        <div id="edit-annotation" class="annotation-info">
+            <p id="edit-annotation-text" class="lyrics"></p>
+            <form asp-action="Edit" asp-controller="Annotations">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input id="edit-annotation-id" name="id" type="hidden" class="form-control" />
+                <div class="form-group">
+                    <textarea required id="edit-annotation-content" class="form-control" name="content" placeholder="Add annotation"></textarea>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </form>
+            <form asp-action="Delete" asp-controller="Annotations">
+                <input id="delete-annotation-id" name="id" type="hidden" class="form-control" />
+                <div class="form-group">
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="col-md-12 jumbotron bio">
+    <text>@Model.Bio</text>
+</div>
+
+@if (User.IsInRole("Admin"))
+{
+<div class="col-md-12 text-center">
+    <hr />
+    @Html.ActionLink("Edit", "Save", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-warning" })
+    @Html.ActionLink("Delete", "Delete", routeValues: new { id = Model.Id }, htmlAttributes: new { @class = "btn btn-danger" })
+</div>
+}
