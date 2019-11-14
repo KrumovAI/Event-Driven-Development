@@ -32,6 +32,11 @@
         [Route("")]
         public IActionResult Search(string term = "")
         {
+            if (term == null)
+            {
+                term = string.Empty;
+            }
+
             term = term.ToLower();
             var vm = new SearchVM();
 
