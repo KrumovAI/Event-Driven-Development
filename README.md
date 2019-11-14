@@ -1,2 +1,2 @@
 # Event-Driven-Development
-Homework project which is a basic representation of the Genius Lyrics Website.
+Homework project written in ASP.NET CORE MVC which is a basic representation of the Genius Lyrics Website.
